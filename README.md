@@ -85,7 +85,7 @@ Recupera todos os funcionários que não estão no departamento de TI, para fins
 
 ---
 
-LIKE:
+<b>LIKE:</b>
 Utilizado para buscar padrões textuais. É comum empregar curingas como %, que representa qualquer sequência de caracteres. Exemplos:
 LIKE 'East%' retorna valores que começam com "East".
 LIKE '%MEX%' encontra qualquer ocorrência da sigla "MEX" no texto.
@@ -93,7 +93,7 @@ Muito útil para encontrar nomes de locais, departamentos, ou domínios de e-mai
 
 ---
 
-Filtragem de datas e horários:
+<b>Filtragem de datas e horários:</b>
 Permite investigar eventos em períodos específicos:
 Datas: login_date = '2022-05-09' retorna registros exatamente daquele dia.
 Horários: login_time > '18:00:00' retorna registros após as 18h.
@@ -101,7 +101,7 @@ Também podem ser usadas comparações como <, >, BETWEEN para maior precisão.
 
 ---
 
-AND / OR:
+<b>AND / OR:</b>
 AND: restringe resultados, exigindo que todas as condições sejam verdadeiras.
 Ex: department = 'Marketing' AND office LIKE 'East%' busca funcionários de Marketing no prédio East.
 OR: amplia os resultados, retornando registros que satisfaçam ao menos uma condição.
@@ -110,7 +110,7 @@ Pode-se combinar AND e OR com parênteses para controlar a lógica.
 
 ---
 
-NOT:
+<b>NOT:</b>
 Inverte a condição, filtrando registros que não correspondem ao critério:
 NOT LIKE '%MEX%': exclui logins do México.
 NOT LIKE '%Tecnologia da Informação%': remove registros de TI.
