@@ -1,75 +1,84 @@
-# SQL Security Investigation Lab
+SQL Security Investigation Lab
 
-Este projeto é parte do Desafio de Certificação do curso **“Fundamentos de Linux e SQL”** do programa **Google Cybersecurity Certificate (Coursera)**.
+Este projeto faz parte do desafio de certificação do curso “Fundamentos de Linux e SQL” do programa Google Cybersecurity Certificate (Coursera). O foco principal está em aplicar filtros SQL para detectar incidentes de segurança, extraindo informações críticas de bancos de dados de login e funcionários.
 
-## 📌 Descrição do Projeto
+📌 Descrição do Projeto
 
-Este repositório contém uma investigação simulada de segurança cibernética utilizando consultas SQL para análise de tentativas de login e informações de funcionários. O objetivo é aplicar filtros SQL (AND, OR, NOT, LIKE) para extrair informações relevantes de tabelas e identificar atividades suspeitas.
+Neste projeto de portfólio de segurança cibernética, executei uma análise detalhada de dados de login e registros de funcionários usando SQL. A tarefa simulou um cenário real em que um analista de segurança identifica possíveis brechas no sistema utilizando operadores como AND, OR, NOT e LIKE. Isso demonstra minha habilidade em realizar investigações de segurança da informação com uso avançado de SQL.
 
-As consultas foram organizadas conforme o cenário apresentado no laboratório: **Filter with AND, OR, and NOT**.
+🧠 Objetivos Técnicos
 
-## 🧠 Objetivos
+Identificar tentativas de login com falha após o expediente.
 
-- Filtrar tentativas de login com falha após o horário comercial.
-- Investigar acessos em datas específicas.
-- Identificar logins originados fora do México.
-- Localizar funcionários do Marketing em escritórios específicos.
-- Encontrar funcionários dos departamentos de Vendas ou Finanças.
-- Excluir funcionários da equipe de TI para futuras atualizações.
+Investigar acessos em datas críticas.
 
----
+Localizar logins provenientes de fora do México.
 
-Descrição do Projeto
+Selecionar funcionários de Marketing no prédio East.
 
-Neste projeto de portfólio de segurança cibernética, investiguei possíveis problemas de segurança usando consultas SQL com filtros AND, OR, NOT e LIKE. Analisei tentativas de login suspeitas e dados de funcionários para apoiar a tomada de decisão em uma organização simulada. Este exercício mostra minha habilidade em usar SQL para investigações relacionadas à segurança da informação.
+Recuperar dados de funcionários dos departamentos de Finanças ou Vendas.
 
-Retrieve after hours failed login attempts
+Excluir funcionários da equipe de TI para priorização de atualizações.
+
+🔍 Consultas SQL e Explicações
+
+1. After-hours Failed Login Attempts
 
 SELECT * FROM log_in_attempts
 WHERE login_time > '18:00:00'
 AND success = 0;
 
-Esta consulta retorna todas as tentativas de login que falharam (success = 0) e ocorreram após as 18h (login_time > '18:00:00'). Isso ajuda a identificar acessos fora do horário comercial.
+Esta consulta retorna tentativas de login fracassadas ocorridas após as 18h, fora do horário comercial.
 
-Retrieve login attempts on specific dates
+2. Login Attempts on Specific Dates
 
 SELECT * FROM log_in_attempts
 WHERE login_date = '2022-05-09'
 OR login_date = '2022-05-08';
 
-A consulta lista tentativas de login ocorridas em 08 ou 09 de maio de 2022. Isso permite investigar atividades em datas específicas associadas a um incidente suspeito.
+Filtra acessos nos dias 08 e 09 de maio de 2022, investigando incidentes em datas específicas.
 
-Retrieve login attempts outside Mexico
+3. Login Attempts Outside Mexico
 
 SELECT * FROM log_in_attempts
 WHERE country NOT LIKE '%MEX%';
 
-A consulta usa NOT LIKE para excluir tentativas de login de países que contêm "MEX" ou "MEXICO". Isso foca a investigação em acessos oriundos de outros locais.
+Exclui todas as tentativas de login originadas do México (incluindo "MEX" e "MEXICO"), focando em acessos externos.
 
-Retrieve employees in Marketing (East building)
+4. Employees in Marketing (East Building)
 
 SELECT * FROM employees
 WHERE department = 'Marketing'
 AND office LIKE 'East%';
 
-A consulta filtra funcionários do departamento de Marketing e que trabalham em escritórios localizados no edifício East. LIKE é usado para encontrar todos os escritórios que comecem com "East".
+Retorna funcionários do departamento de Marketing localizados em qualquer unidade do prédio East.
 
-Retrieve employees in Finance or Sales
+5. Employees in Finance or Sales
 
 SELECT * FROM employees
 WHERE department = 'Finance'
 OR department = 'Sales';
 
-Seleciona todos os funcionários dos departamentos Finance ou Sales. O operador OR garante que qualquer um dos dois seja incluído.
+Seleciona todos os registros de funcionários vinculados aos departamentos Financeiro ou Comercial.
 
-Retrieve all employees not in IT
+6. Employees not in IT
 
 SELECT * FROM employees
 WHERE department NOT LIKE '%Tecnologia da Informação%';
 
-Filtra todos os funcionários que não estão no departamento de TI. O operador NOT combinado com LIKE exclui qualquer linha com o texto correspondente.
+Recupera todos os funcionários que não estão no departamento de TI, para fins de atualização prioritária.
 
-Resumo do Projeto
+🧾 Técnicas Aplicadas
 
-Neste projeto, executei diversas consultas SQL para investigar tentativas de login suspeitas e identificar funcionários com base em departamento e localização. Usei filtros com AND, OR, NOT e LIKE para realizar buscas precisas e eficazes. As consultas abordaram incidentes específicos, como logins após o expediente, origens de países suspeitos e departamentos alvo de atualizações de segurança. Este exercício demonstra competência em investigação SQL com foco em segurança da informação.
+LIKE: Usado para buscas por padrão textual (ex: 'East%').
+
+NOT: Exclui registros com condições específicas (ex: não-TI, fora do México).
+
+AND/OR: Combina múltiplos critérios de filtragem.
+
+Filtro por hora/data: Identifica eventos relevantes com base em login_time e login_date.
+
+📘 Resumo do Projeto
+
+Este laboratório prático demonstra como operadores SQL podem ser aplicados de forma estratégica para investigar falhas de segurança em sistemas corporativos. Através da manipulação de dados com AND, OR, NOT e LIKE, foi possível identificar comportamentos fora do esperado, priorizar departamentos e planejar medidas corretivas. Esta atividade representa minha capacidade analítica na detecção de ameaças e no suporte à segurança organizacional via SQL.
 
