@@ -83,10 +83,30 @@ Recupera todos os funcionários que não estão no departamento de TI, para fins
 
 ## 🧾 Técnicas Aplicadas
 
-- **LIKE**: Usado para buscas por padrão textual (ex: 'East%').
-- **NOT**: Exclui registros com condições específicas (ex: não-TI, fora do México).
-- **AND/OR**: Combina múltiplos critérios de filtragem.
-- **Filtro por hora/data**: Identifica eventos relevantes com base em `login_time` e `login_date`.
+LIKE:
+Utilizado para buscar padrões textuais. É comum empregar curingas como %, que representa qualquer sequência de caracteres. Exemplos:
+LIKE 'East%' retorna valores que começam com "East".
+LIKE '%MEX%' encontra qualquer ocorrência da sigla "MEX" no texto.
+Muito útil para encontrar nomes de locais, departamentos, ou domínios de e-mail parciais.
+
+Filtragem de datas e horários:
+Permite investigar eventos em períodos específicos:
+Datas: login_date = '2022-05-09' retorna registros exatamente daquele dia.
+Horários: login_time > '18:00:00' retorna registros após as 18h.
+Também podem ser usadas comparações como <, >, BETWEEN para maior precisão.
+
+AND / OR:
+AND: restringe resultados, exigindo que todas as condições sejam verdadeiras.
+Ex: department = 'Marketing' AND office LIKE 'East%' busca funcionários de Marketing no prédio East.
+OR: amplia os resultados, retornando registros que satisfaçam ao menos uma condição.
+Ex: department = 'Finance' OR department = 'Sales' retorna quem trabalha em qualquer um dos dois departamentos.
+Pode-se combinar AND e OR com parênteses para controlar a lógica.
+
+NOT:
+Inverte a condição, filtrando registros que não correspondem ao critério:
+NOT LIKE '%MEX%': exclui logins do México.
+NOT LIKE '%Tecnologia da Informação%': remove registros de TI.
+Também pode ser usado como NOT (condição) para negar uma expressão inteira.
 
 ---
 
