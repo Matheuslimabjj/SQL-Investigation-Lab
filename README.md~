@@ -1,0 +1,75 @@
+# SQL Security Investigation Lab
+
+Este projeto é parte do Desafio de Certificação do curso **“Fundamentos de Linux e SQL”** do programa **Google Cybersecurity Certificate (Coursera)**.
+
+## 📌 Descrição do Projeto
+
+Este repositório contém uma investigação simulada de segurança cibernética utilizando consultas SQL para análise de tentativas de login e informações de funcionários. O objetivo é aplicar filtros SQL (AND, OR, NOT, LIKE) para extrair informações relevantes de tabelas e identificar atividades suspeitas.
+
+As consultas foram organizadas conforme o cenário apresentado no laboratório: **Filter with AND, OR, and NOT**.
+
+## 🧠 Objetivos
+
+- Filtrar tentativas de login com falha após o horário comercial.
+- Investigar acessos em datas específicas.
+- Identificar logins originados fora do México.
+- Localizar funcionários do Marketing em escritórios específicos.
+- Encontrar funcionários dos departamentos de Vendas ou Finanças.
+- Excluir funcionários da equipe de TI para futuras atualizações.
+
+---
+
+Descrição do Projeto
+
+Neste projeto de portfólio de segurança cibernética, investiguei possíveis problemas de segurança usando consultas SQL com filtros AND, OR, NOT e LIKE. Analisei tentativas de login suspeitas e dados de funcionários para apoiar a tomada de decisão em uma organização simulada. Este exercício mostra minha habilidade em usar SQL para investigações relacionadas à segurança da informação.
+
+Retrieve after hours failed login attempts
+
+SELECT * FROM log_in_attempts
+WHERE login_time > '18:00:00'
+AND success = 0;
+
+Esta consulta retorna todas as tentativas de login que falharam (success = 0) e ocorreram após as 18h (login_time > '18:00:00'). Isso ajuda a identificar acessos fora do horário comercial.
+
+Retrieve login attempts on specific dates
+
+SELECT * FROM log_in_attempts
+WHERE login_date = '2022-05-09'
+OR login_date = '2022-05-08';
+
+A consulta lista tentativas de login ocorridas em 08 ou 09 de maio de 2022. Isso permite investigar atividades em datas específicas associadas a um incidente suspeito.
+
+Retrieve login attempts outside Mexico
+
+SELECT * FROM log_in_attempts
+WHERE country NOT LIKE '%MEX%';
+
+A consulta usa NOT LIKE para excluir tentativas de login de países que contêm "MEX" ou "MEXICO". Isso foca a investigação em acessos oriundos de outros locais.
+
+Retrieve employees in Marketing (East building)
+
+SELECT * FROM employees
+WHERE department = 'Marketing'
+AND office LIKE 'East%';
+
+A consulta filtra funcionários do departamento de Marketing e que trabalham em escritórios localizados no edifício East. LIKE é usado para encontrar todos os escritórios que comecem com "East".
+
+Retrieve employees in Finance or Sales
+
+SELECT * FROM employees
+WHERE department = 'Finance'
+OR department = 'Sales';
+
+Seleciona todos os funcionários dos departamentos Finance ou Sales. O operador OR garante que qualquer um dos dois seja incluído.
+
+Retrieve all employees not in IT
+
+SELECT * FROM employees
+WHERE department NOT LIKE '%Tecnologia da Informação%';
+
+Filtra todos os funcionários que não estão no departamento de TI. O operador NOT combinado com LIKE exclui qualquer linha com o texto correspondente.
+
+Resumo do Projeto
+
+Neste projeto, executei diversas consultas SQL para investigar tentativas de login suspeitas e identificar funcionários com base em departamento e localização. Usei filtros com AND, OR, NOT e LIKE para realizar buscas precisas e eficazes. As consultas abordaram incidentes específicos, como logins após o expediente, origens de países suspeitos e departamentos alvo de atualizações de segurança. Este exercício demonstra competência em investigação SQL com foco em segurança da informação.
+
